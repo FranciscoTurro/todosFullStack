@@ -12,12 +12,7 @@ export const userController = {
   signupUser: async (req: Request, res: Response) => {
     try {
       const { username, password } = req.body;
-
-      console.log(req.body);
-
-      if (!username || !password) {
-        throw Error('All fields must be complete');
-      }
+      if (!username || !password) throw Error('All fields must be complete');
 
       const salt = await bcrypt.genSalt(10);
       const hashedPass = await bcrypt.hash(password, salt);
@@ -26,6 +21,24 @@ export const userController = {
         username: username,
         password: hashedPass,
       });
+
+      const token = createJWT(user._id);
+
+      res.status(200).send({ user, token });
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  },
+  loginUser: async (req: Request, res: Response) => {
+    try {
+      const { username, password } = req.body;
+      if (!username || !password) throw Error('All fields must be complete');
+
+      const user = await UserModel.findOne({ username });
+      if (!user) throw Error('Invalid username');
+
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (!passwordMatch) throw Error('Invalid password');
 
       const token = createJWT(user._id);
 

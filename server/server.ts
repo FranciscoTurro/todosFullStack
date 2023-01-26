@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
-import { userRouter } from './routes/api/user';
+import { apiRouter } from './routes/api/index';
 
 const connectToDb = async () => {
   if (!process.env.MONGO_URL) console.log('Connection string missing');
@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/users', userRouter);
+app.use('/api', apiRouter);
 
 connectToDb()
   .then(() => console.log('Connected to database'))
