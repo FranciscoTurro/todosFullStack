@@ -1,14 +1,9 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
 import { UserModel } from '../models/Users';
-import { Types } from 'mongoose';
-
-export interface RequestWithUser extends Request {
-  user: Types.ObjectId;
-}
 
 export const requireAuth = async (
-  req: RequestWithUser,
+  req: Request,
   res: Response,
   next: NextFunction
 ) => {

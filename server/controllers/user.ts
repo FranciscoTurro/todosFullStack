@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { Types } from 'mongoose';
+import { ListModel } from '../models/lists';
 
 const createJWT = (id: Types.ObjectId) => {
   return jwt.sign({ id }, process.env.SECRET!, { expiresIn: '3d' });
@@ -12,7 +13,6 @@ export const userController = {
   signupUser: async (req: Request, res: Response) => {
     try {
       const { username, password } = req.body;
-      if (!username || !password) throw Error('All fields must be complete');
 
       const salt = await bcrypt.genSalt(10);
       const hashedPass = await bcrypt.hash(password, salt);
@@ -20,6 +20,11 @@ export const userController = {
       const user = await UserModel.create({
         username: username,
         password: hashedPass,
+      });
+
+      await ListModel.create({
+        name: 'General',
+        creator: user._id,
       });
 
       const token = createJWT(user._id);
