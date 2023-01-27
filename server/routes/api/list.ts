@@ -6,4 +6,6 @@ export const listRouter = express.Router();
 
 listRouter.use(requireAuth);
 
-listRouter.post('/create', listController.createList);
+listRouter.post('/', listController.createList);
+
+listRouter.delete('/:id', listController.deleteList);

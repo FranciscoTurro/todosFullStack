@@ -34,6 +34,7 @@ export const userController = {
       res.status(400).json({ error: error.message });
     }
   },
+
   loginUser: async (req: Request, res: Response) => {
     try {
       const { username, password } = req.body;
