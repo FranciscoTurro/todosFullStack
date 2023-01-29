@@ -21,24 +21,22 @@ export const listController = {
     try {
       const { id } = req.params;
 
-      if (!mongoose.Types.ObjectId.isValid(id))
-        return res.status(404).json({ error: 'Invalid list ID' });
+      if (!mongoose.Types.ObjectId.isValid(id)) throw Error('Invalid list ID');
 
       const list = await ListModel.findById(id);
 
       if (JSON.stringify(list.creator) !== JSON.stringify(req.user))
-        return res
-          .status(400)
-          .json({ error: 'List was not created by current user' });
+        throw Error('List was not created by current user');
 
       const deletedList = await ListModel.findByIdAndDelete(id);
 
-      if (!deletedList)
-        return res.status(404).json({ error: `List doesn't exist` });
-
       res.status(200).json(deletedList);
     } catch (error: any) {
-      res.status(400).json({ error: error.message });
+      res.status(500).json({ error: error.message });
     }
+  },
+
+  getLists: async (req: Request, res: Response) => {
+    //TODO, get all the lists in a user
   },
 };
