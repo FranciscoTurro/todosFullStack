@@ -1,6 +1,7 @@
 import { ListModel } from '../models/lists';
 import { Request, Response } from 'express';
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
+import { UserModel } from '../models/Users';
 
 export const listController = {
   createList: async (req: Request, res: Response) => {
@@ -11,6 +12,11 @@ export const listController = {
         name: name,
         creator: req.user,
       });
+
+      const user = await UserModel.findById(req.user);
+      user.lists.push(list._id);
+      await user.save();
+
       res.status(200).json(list);
     } catch (error: any) {
       res.status(400).json({ error: error.message });
@@ -28,7 +34,13 @@ export const listController = {
       if (JSON.stringify(list.creator) !== JSON.stringify(req.user))
         throw Error('List was not created by current user');
 
+      const user = await UserModel.findById(req.user);
+
       const deletedList = await ListModel.findByIdAndDelete(id);
+
+      const listIndex = user.lists.indexOf(new Types.ObjectId(id));
+      if (listIndex > -1) user.lists.splice(listIndex, 1);
+      await user.save();
 
       res.status(200).json(deletedList);
     } catch (error: any) {

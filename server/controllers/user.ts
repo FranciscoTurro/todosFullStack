@@ -22,10 +22,13 @@ export const userController = {
         password: hashedPass,
       });
 
-      await ListModel.create({
+      const list = await ListModel.create({
         name: 'General',
         creator: user._id,
       });
+
+      user.lists.push(list._id);
+      await user.save();
 
       const token = createJWT(user._id);
 

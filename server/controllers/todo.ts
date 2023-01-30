@@ -26,7 +26,7 @@ export const todoController = {
       });
 
       list.todos.push(todo._id);
-      list.save();
+      await list.save();
 
       res.status(200).json(todo);
     } catch (error: any) {
@@ -48,7 +48,7 @@ export const todoController = {
 
       const todoIndex = list.todos.indexOf(todo._id);
       if (todoIndex > -1) list.todos.splice(todoIndex, 1);
-      list.save();
+      await list.save();
 
       const deletedTodo = await TodoModel.findByIdAndDelete(todoID);
 
