@@ -10,9 +10,9 @@ export interface ITodo {
 
 const todoSchema = new Schema({
   name: { type: String, required: true },
-  description: { type: String, required: false },
-  dueDate: { type: Date, required: false },
-  completed: { type: Boolean, required: true, default: false },
+  description: String,
+  dueDate: Date,
+  completed: { type: Boolean, default: false },
   list: { type: Types.ObjectId, ref: 'Lists', required: true },
 });
 

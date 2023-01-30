@@ -37,6 +37,13 @@ export const listController = {
   },
 
   getLists: async (req: Request, res: Response) => {
-    //TODO, get all the lists in a user
+    try {
+      const lists = await ListModel.find({ creator: req.user });
+      if (!lists) throw Error('Current user has no lists created');
+
+      res.status(200).json(lists);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
   },
 };

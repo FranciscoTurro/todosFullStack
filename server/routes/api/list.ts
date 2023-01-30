@@ -8,4 +8,6 @@ listRouter.use(requireAuth);
 
 listRouter.post('/', listController.createList);
 
+listRouter.get('/',listController.getLists)
+
 listRouter.delete('/:id', listController.deleteList);

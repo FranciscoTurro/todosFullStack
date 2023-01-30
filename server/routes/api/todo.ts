@@ -8,4 +8,6 @@ todoRouter.use(requireAuth);
 
 todoRouter.post('/:listID', todoController.createTodo);
 
+todoRouter.get('/:listID', todoController.getTodos);
+
 todoRouter.delete('/:todoID', todoController.deleteTodo);
