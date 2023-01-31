@@ -8,9 +8,7 @@ todoRouter.use(requireAuth);
 
 todoRouter.post('/:listID', todoController.createTodo);
 
-todoRouter.get('/:listID', todoController.getTodos);
-
-todoRouter.get('/single/:todoID', todoController.getOneTodo);
+todoRouter.get('/:todoID', todoController.getOneTodo);
 
 todoRouter.patch('/:todoID', todoController.editTodo);
 

@@ -11,6 +11,7 @@
 
 - mobile design, the todos become shorter and the sidebar collapses (or becomes smaller), pressing a button brings it back
 - design will be an upgraded clone of https://khunhour.github.io/todo_list/
+- set up state for the lists and the auth in context. fetch the info from the components, and set it
 
 # Things to do
 

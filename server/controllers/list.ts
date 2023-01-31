@@ -62,7 +62,7 @@ export const listController = {
   getOneList: async (req: Request, res: Response) => {
     try {
       const { listID } = req.params;
-      const list = await ListModel.findById(listID);
+      const list = await ListModel.findById(listID).populate('todos');
 
       if (JSON.stringify(list.creator) !== JSON.stringify(req.user))
         throw Error('List was not created by current user');

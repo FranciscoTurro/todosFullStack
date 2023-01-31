@@ -58,23 +58,6 @@ export const todoController = {
     }
   },
 
-  getTodos: async (req: Request, res: Response) => {
-    try {
-      const { listID } = req.params;
-      if (!mongoose.Types.ObjectId.isValid(listID))
-        throw Error('Invalid list ID');
-
-      const list = await ListModel.findById(listID).populate('todos');
-
-      if (JSON.stringify(list.creator) !== JSON.stringify(req.user))
-        throw Error('List was not created by current user');
-
-      res.status(200).json(list.todos);
-    } catch (error: any) {
-      res.status(400).json({ error: error.message });
-    }
-  },
-
   getOneTodo: async (req: Request, res: Response) => {
     try {
       const { todoID } = req.params;
