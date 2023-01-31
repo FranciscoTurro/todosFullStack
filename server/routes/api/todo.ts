@@ -10,4 +10,8 @@ todoRouter.post('/:listID', todoController.createTodo);
 
 todoRouter.get('/:listID', todoController.getTodos);
 
+todoRouter.get('/single/:todoID', todoController.getOneTodo);
+
+todoRouter.patch('/:todoID', todoController.editTodo);
+
 todoRouter.delete('/:todoID', todoController.deleteTodo);

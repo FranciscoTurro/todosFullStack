@@ -74,4 +74,42 @@ export const todoController = {
       res.status(400).json({ error: error.message });
     }
   },
+
+  getOneTodo: async (req: Request, res: Response) => {
+    try {
+      const { todoID } = req.params;
+      if (!mongoose.Types.ObjectId.isValid(todoID))
+        throw Error('Invalid todo ID');
+
+      const todo = await TodoModel.findById(new Types.ObjectId(todoID));
+
+      const list = await ListModel.findById(todo.list);
+      if (JSON.stringify(list.creator) !== JSON.stringify(req.user))
+        throw Error('Todo was not created by current user');
+
+      res.status(200).json(todo);
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  },
+
+  editTodo: async (req: Request, res: Response) => {
+    try {
+      const { todoID } = req.params;
+      if (!mongoose.Types.ObjectId.isValid(todoID))
+        throw Error('Invalid todo ID');
+
+      const todo = await TodoModel.findById(new Types.ObjectId(todoID));
+
+      const list = await ListModel.findById(todo.list);
+      if (JSON.stringify(list.creator) !== JSON.stringify(req.user))
+        throw Error('Todo was not created by current user');
+
+      await todo.updateOne({ ...req.body });
+
+      res.status(200).json('Ok');
+    } catch (error: any) {
+      res.status(400).json({ error: error.message });
+    }
+  },
 };

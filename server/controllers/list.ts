@@ -58,4 +58,36 @@ export const listController = {
       res.status(500).json({ error: error.message });
     }
   },
+
+  getOneList: async (req: Request, res: Response) => {
+    try {
+      const { listID } = req.params;
+      const list = await ListModel.findById(listID);
+
+      if (JSON.stringify(list.creator) !== JSON.stringify(req.user))
+        throw Error('List was not created by current user');
+
+      res.status(200).json(list);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  changeListName: async (req: Request, res: Response) => {
+    try {
+      const { listID } = req.params;
+      const list = await ListModel.findById(listID);
+
+      if (JSON.stringify(list.creator) !== JSON.stringify(req.user))
+        throw Error('List was not created by current user');
+
+      const { name } = req.body;
+      list.name = name;
+      await list.save();
+
+      res.status(200).json(list);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  },
 };
