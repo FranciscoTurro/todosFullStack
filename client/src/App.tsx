@@ -1,3 +1,10 @@
+import { AppRouter } from './AppRouter';
+import { ContextProvider } from './context/ContextProvider';
+
 export const App = () => {
-  return <div>app</div>;
+  return (
+    <ContextProvider>
+      <AppRouter />
+    </ContextProvider>
+  );
 };
