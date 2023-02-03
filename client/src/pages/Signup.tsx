@@ -18,6 +18,7 @@ export const Signup = () => {
       return axios.post('http://localhost:4000/api/users/signup', user);
     },
     onSuccess: (data) => {
+      localStorage.setItem('currentUser', data.data);
       setCurrentUser(data.data);
       console.log('SIGNUP WORKED');
     },

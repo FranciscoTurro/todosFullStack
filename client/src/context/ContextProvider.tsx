@@ -9,12 +9,8 @@ export const ContextProvider: React.FC<Props> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState('');
 
   useEffect(() => {
-    localStorage.setItem('currentUser', currentUser);
-  }, [currentUser]);
-
-  useEffect(() => {
     const user = localStorage.getItem('currentUser');
-    if (user !== '') setCurrentUser(user!);
+    if (user) setCurrentUser(user);
   }, []);
 
   return (

@@ -23,6 +23,7 @@ export const Navbar = () => {
             <li>
               <button
                 onClick={() => {
+                  localStorage.removeItem('currentUser');
                   setCurrentUser('');
                   console.log('logged out');
                 }}
