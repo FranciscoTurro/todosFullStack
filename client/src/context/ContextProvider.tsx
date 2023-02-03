@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Context } from './Context';
 
 interface Props {
@@ -6,11 +6,16 @@ interface Props {
 }
 
 export const ContextProvider: React.FC<Props> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(''); //localstorage!
+  const [currentUser, setCurrentUser] = useState('');
+
+  useEffect(() => {
+    const user = localStorage.getItem('currentUser');
+    if (user) setCurrentUser(user);
+    if (!user) setCurrentUser('');
+  }, []);
+  //page needs to update when the currentUser is set. netninja has a video on this problem im pretty sure
 
   return (
-    <Context.Provider value={{ currentUser, setCurrentUser }}>
-      {children}
-    </Context.Provider>
+    <Context.Provider value={{ currentUser }}>{children}</Context.Provider>
   );
 };

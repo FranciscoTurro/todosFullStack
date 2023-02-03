@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { useContext, useState } from 'react';
-import { Context } from '../context/Context';
+import { useState } from 'react';
 
 interface IUser {
   username: string;
@@ -9,8 +8,6 @@ interface IUser {
 }
 
 export const Signup = () => {
-  const { setCurrentUser } = useContext(Context);
-
   const [user, setUser] = useState<IUser>({ username: '', password: '' });
 
   const mutation = useMutation({
@@ -18,7 +15,7 @@ export const Signup = () => {
       return axios.post('http://localhost:4000/api/users/signup', user);
     },
     onSuccess: (data) => {
-      setCurrentUser(data.data);
+      localStorage.setItem('currentUser', data.data);
       console.log('SIGNUP WORKED');
     },
   });

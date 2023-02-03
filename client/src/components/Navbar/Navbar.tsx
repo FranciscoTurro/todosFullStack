@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../context/Context';
+import { useLogout } from '../../hooks/useLogout';
 
 export const Navbar = () => {
   const { currentUser } = useContext(Context);
@@ -21,7 +22,7 @@ export const Navbar = () => {
         {currentUser ? (
           <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              <Link to={'/'}>Logout</Link>
+              <button onClick={useLogout}>Log out</button>
             </li>
           </ul>
         ) : (
