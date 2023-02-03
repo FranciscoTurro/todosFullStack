@@ -18,7 +18,8 @@ export const Signup = () => {
       return axios.post('http://localhost:4000/api/users/signup', user);
     },
     onSuccess: (data) => {
-      setCurrentUser(data.data.token);
+      setCurrentUser(data.data);
+      console.log('SIGNUP WORKED');
     },
   });
 
@@ -31,6 +32,7 @@ export const Signup = () => {
     <div>loading</div>
   ) : (
     <form autoComplete="off" onSubmit={handleSubmit}>
+      SIGNUP
       <div className="mb-6">
         <label htmlFor="userName" className="block mb-2 text-sm font-medium ">
           Username

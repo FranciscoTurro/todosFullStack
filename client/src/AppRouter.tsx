@@ -1,12 +1,26 @@
-import { Route, Routes } from 'react-router-dom';
+import { useContext } from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navbar } from './components/Navbar/Navbar';
+import { Context } from './context/Context';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 
 export const AppRouter = () => {
+  const { currentUser } = useContext(Context);
+
   return (
-    <Routes>
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
+    <>
+      <Navbar />
+      <Routes>
+        <Route
+          path="/signup"
+          element={currentUser ? <Navigate to={'/'} /> : <Signup />}
+        />
+        <Route
+          path="/login"
+          element={currentUser ? <Navigate to={'/'} /> : <Login />}
+        />
+      </Routes>
+    </>
   );
 };

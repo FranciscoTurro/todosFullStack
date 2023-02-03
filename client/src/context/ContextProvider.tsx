@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const ContextProvider: React.FC<Props> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUser, setCurrentUser] = useState(''); //localstorage!
 
   return (
     <Context.Provider value={{ currentUser, setCurrentUser }}>
