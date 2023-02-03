@@ -5,6 +5,12 @@ import { Context } from '../../context/Context';
 export const Navbar = () => {
   const { currentUser, setCurrentUser } = useContext(Context);
 
+  const handleLogout = () => {
+    localStorage.removeItem('currentUser');
+    setCurrentUser('');
+    console.log('logged out');
+  };
+
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
@@ -21,15 +27,7 @@ export const Navbar = () => {
         {currentUser ? (
           <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              <button
-                onClick={() => {
-                  localStorage.removeItem('currentUser');
-                  setCurrentUser('');
-                  console.log('logged out');
-                }}
-              >
-                Log out
-              </button>
+              <button onClick={handleLogout}>Log out</button>
             </li>
           </ul>
         ) : (
