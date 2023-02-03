@@ -9,13 +9,17 @@ export const ContextProvider: React.FC<Props> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState('');
 
   useEffect(() => {
+    localStorage.setItem('currentUser', currentUser);
+  }, [currentUser]);
+
+  useEffect(() => {
     const user = localStorage.getItem('currentUser');
-    if (user) setCurrentUser(user);
-    if (!user) setCurrentUser('');
+    if (user !== '') setCurrentUser(user!);
   }, []);
-  //page needs to update when the currentUser is set. netninja has a video on this problem im pretty sure
 
   return (
-    <Context.Provider value={{ currentUser }}>{children}</Context.Provider>
+    <Context.Provider value={{ currentUser, setCurrentUser }}>
+      {children}
+    </Context.Provider>
   );
 };
