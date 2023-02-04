@@ -1,6 +1,6 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import { Request, Response, NextFunction } from 'express';
-import { UserModel } from '../models/Users';
+import { UserModel } from '../models/users';
 
 export const requireAuth = async (
   req: Request,

@@ -13,6 +13,8 @@ export const Signup = () => {
 
   const [user, setUser] = useState<IUser>({ username: '', password: '' });
 
+  const [error, setError] = useState();
+
   const mutation = useMutation({
     mutationFn: (user: IUser) => {
       return axios.post('http://localhost:4000/api/users/signup', user);
@@ -20,7 +22,10 @@ export const Signup = () => {
     onSuccess: (data) => {
       localStorage.setItem('currentUser', data.data);
       setCurrentUser(data.data);
-      console.log('SIGNUP WORKED');
+      console.log('LOGIN WORKED');
+    },
+    onError: (error: any) => {
+      setError(error.response.data.error);
     },
   });
 
@@ -58,12 +63,15 @@ export const Signup = () => {
           required
         />
       </div>
-      <button
-        type="submit"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
-      >
-        Submit
-      </button>
+      <div>
+        {error ? <p className="text-red-500">{error}</p> : null}
+        <button
+          type="submit"
+          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+        >
+          Submit
+        </button>
+      </div>
     </form>
   );
 };

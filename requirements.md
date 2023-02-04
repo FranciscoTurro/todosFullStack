@@ -15,4 +15,3 @@
 # Things to do
 
 - add proper response codes to each error (throw new Error('New error message', { statusCode: 404 }), and then res.status(e.statusCode))
-- add error messages to the frontend (incorrect password, etc)

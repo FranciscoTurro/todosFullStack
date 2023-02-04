@@ -1,7 +1,7 @@
 import { ListModel } from '../models/lists';
 import { Request, Response } from 'express';
 import mongoose, { Types } from 'mongoose';
-import { UserModel } from '../models/Users';
+import { UserModel } from '../models/users';
 
 export const listController = {
   createList: async (req: Request, res: Response) => {
