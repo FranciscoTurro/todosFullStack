@@ -1,8 +1,6 @@
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
-import { useContext, useState } from 'react';
-import { Context } from '../context/Context';
+import { useState } from 'react';
 import { CircleLoader } from 'react-spinners';
+import { useLogin } from '../hooks/useLogin';
 
 interface IUser {
   username: string;
@@ -10,32 +8,16 @@ interface IUser {
 }
 
 export const Login = () => {
-  const { setCurrentUser } = useContext(Context);
-
   const [user, setUser] = useState<IUser>({ username: '', password: '' });
 
-  const [error, setError] = useState();
-
-  const mutation = useMutation({
-    mutationFn: (user: IUser) => {
-      return axios.post('http://localhost:4000/api/users/login', user);
-    },
-    onSuccess: (data) => {
-      localStorage.setItem('currentUser', data.data);
-      setCurrentUser(data.data);
-      console.log('LOGIN WORKED');
-    },
-    onError: (error: any) => {
-      setError(error.response.data.error);
-    },
-  });
+  const { error, login } = useLogin();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    mutation.mutate(user);
+    login.mutate(user);
   };
 
-  if (mutation.isLoading) return <CircleLoader color="red" />;
+  if (login.isLoading) return <CircleLoader color="red" />;
 
   return (
     <form autoComplete="off" onSubmit={handleSubmit}>

@@ -1,14 +1,15 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../context/Context';
+import { useLogout } from '../../hooks/useLogout';
 
 export const Navbar = () => {
-  const { currentUser, setCurrentUser } = useContext(Context);
+  const { currentUser } = useContext(Context);
 
-  const handleLogout = () => {
-    localStorage.removeItem('currentUser');
-    setCurrentUser('');
-    console.log('logged out');
+  const logout = useLogout();
+
+  const handleClick = () => {
+    logout();
   };
 
   return (
@@ -27,7 +28,7 @@ export const Navbar = () => {
         {currentUser ? (
           <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
-              <button onClick={handleLogout}>Log out</button>
+              <button onClick={handleClick}>Log out</button>
             </li>
           </ul>
         ) : (

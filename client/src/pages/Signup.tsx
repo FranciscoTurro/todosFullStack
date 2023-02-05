@@ -1,7 +1,5 @@
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
-import { useContext, useState } from 'react';
-import { Context } from '../context/Context';
+import { useState } from 'react';
+import { useSignup } from '../hooks/useSignup';
 
 interface IUser {
   username: string;
@@ -9,32 +7,16 @@ interface IUser {
 }
 
 export const Signup = () => {
-  const { setCurrentUser } = useContext(Context);
-
   const [user, setUser] = useState<IUser>({ username: '', password: '' });
 
-  const [error, setError] = useState();
-
-  const mutation = useMutation({
-    mutationFn: (user: IUser) => {
-      return axios.post('http://localhost:4000/api/users/signup', user);
-    },
-    onSuccess: (data) => {
-      localStorage.setItem('currentUser', data.data);
-      setCurrentUser(data.data);
-      console.log('LOGIN WORKED');
-    },
-    onError: (error: any) => {
-      setError(error.response.data.error);
-    },
-  });
+  const { error, signup } = useSignup();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    mutation.mutate(user);
+    signup.mutate(user);
   };
 
-  return mutation.isLoading ? (
+  return signup.isLoading ? (
     <div>loading</div>
   ) : (
     <form autoComplete="off" onSubmit={handleSubmit}>
@@ -47,6 +29,7 @@ export const Signup = () => {
           onChange={(e) => setUser({ ...user, username: e.target.value })}
           type="text"
           id="userName"
+          value={user.username}
           className="text-black bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           required
         />
@@ -59,6 +42,7 @@ export const Signup = () => {
           onChange={(e) => setUser({ ...user, password: e.target.value })}
           type="password"
           id="password"
+          value={user.password}
           className="text-black bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           required
         />
