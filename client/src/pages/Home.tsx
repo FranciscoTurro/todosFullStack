@@ -1,3 +1,9 @@
+import { Sidebar } from '../components/Sidebar/Sidebar';
+
 export const Home = () => {
-  return <div>hgome</div>;
+  return (
+    <>
+      <Sidebar />
+    </>
+  );
 };

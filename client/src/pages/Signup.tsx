@@ -27,9 +27,9 @@ export const Signup = () => {
         </label>
         <input
           onChange={(e) => setUser({ ...user, username: e.target.value })}
+          value={user.username}
           type="text"
           id="userName"
-          value={user.username}
           className="text-black bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           required
         />

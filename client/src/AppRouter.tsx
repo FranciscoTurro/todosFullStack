@@ -4,6 +4,7 @@ import { Navbar } from './components/Navbar/Navbar';
 import { Context } from './context/Context';
 import { Home } from './pages/Home';
 import { Login } from './pages/Login';
+import { NotLoggedHome } from './pages/NotLoggedHome';
 import { Signup } from './pages/Signup';
 
 export const AppRouter = () => {
@@ -13,7 +14,7 @@ export const AppRouter = () => {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={currentUser ? <Home /> : <NotLoggedHome />} />
         <Route
           path="/signup"
           element={currentUser ? <Navigate to={'/'} /> : <Signup />}
@@ -22,6 +23,7 @@ export const AppRouter = () => {
           path="/login"
           element={currentUser ? <Navigate to={'/'} /> : <Login />}
         />
+        <Route path="*" element={<Navigate to={'/'} />} />
       </Routes>
     </>
   );
