@@ -22,7 +22,6 @@ export const ContextProvider: React.FC<Props> = ({ children }) => {
   const [sidebarClassName, setSidebarClassName] = useState(openSidebar);
 
   const handleSidebarToggle = () => {
-    console.log(sidebarClassName);
     if (sidebarClassName === openSidebar) setSidebarClassName(closedSidebar);
     if (sidebarClassName === closedSidebar) setSidebarClassName(openSidebar);
   };

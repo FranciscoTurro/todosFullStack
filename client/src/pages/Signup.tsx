@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { CircleLoader } from 'react-spinners';
 import { useSignup } from '../hooks/useSignup';
 
 interface IUser {
@@ -15,6 +16,8 @@ export const Signup = () => {
     event.preventDefault();
     signup.mutate(user);
   };
+
+  if (signup.isLoading) return <CircleLoader color="red" />;
 
   return signup.isLoading ? (
     <div>loading</div>

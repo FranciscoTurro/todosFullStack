@@ -1,3 +1,3 @@
 export const NotLoggedHome = () => {
-  return <div>Log in!</div>;
+  return <div>YOU ARE NOT LOGGED IN</div>;
 };
