@@ -7,7 +7,7 @@ import { FolderIcon } from './FolderIcon';
 import { OptionsButton } from './OptionsButton';
 
 export const Sidebar = () => {
-  const { sidebarClassName, currentUser } = useContext(Context);
+  const { isSidebarOpen, currentUser } = useContext(Context);
 
   const [lists, setLists] = useState<any[]>();
 
@@ -33,7 +33,14 @@ export const Sidebar = () => {
 
   return (
     <>
-      <aside id="separator-sidebar" className={sidebarClassName}>
+      <aside
+        id="separator-sidebar"
+        className={`fixed left-0 z-40 w-64 h-screen transition-transform ${
+          isSidebarOpen
+            ? 'sm:translate-x-0 transform-none'
+            : '-translate-x-full sm:translate-x-0'
+        }`}
+      >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
           <ul className="space-y-4 text-center">
             {isLoading ? (

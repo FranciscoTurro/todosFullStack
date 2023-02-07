@@ -13,18 +13,10 @@ export const ContextProvider: React.FC<Props> = ({ children }) => {
     if (user) setCurrentUser(user);
   }, []);
 
-  const openSidebar: string =
-    'fixed left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0';
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-  const closedSidebar: string =
-    'fixed left-0 z-40 w-64 h-screen transition-transform sm:translate-x-0 transform-none';
-
-  const [sidebarClassName, setSidebarClassName] = useState(openSidebar);
-
-  const handleSidebarToggle = () => {
-    sidebarClassName === openSidebar
-      ? setSidebarClassName(closedSidebar)
-      : setSidebarClassName(openSidebar);
+  const toggleIsSidebarOpen = () => {
+    setIsSidebarOpen(!isSidebarOpen);
   };
 
   return (
@@ -32,8 +24,8 @@ export const ContextProvider: React.FC<Props> = ({ children }) => {
       value={{
         currentUser,
         setCurrentUser,
-        sidebarClassName,
-        handleSidebarToggle,
+        isSidebarOpen,
+        toggleIsSidebarOpen,
       }}
     >
       {children}
