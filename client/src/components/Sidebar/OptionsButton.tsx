@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { RingLoader } from 'react-spinners';
 import { deleteList } from '../../api/deleteList';
 
 interface OptionsButtonProps {
@@ -53,12 +54,18 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({ listID }) => {
         } left-0 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
       >
         <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-          <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            <button onClick={() => alert(2)}> Change name</button>
+          <li className="cursor-pointer block  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+            <button className="px-4 py-2 w-full" onClick={() => alert(2)}>
+              Change name
+            </button>
           </li>
-          <li className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            <button className="w-full" onClick={handleDelete}>
-              Delete
+          <li className="cursor-pointer block  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+            <button className="px-4 py-2 w-full" onClick={handleDelete}>
+              {deletion.isLoading ? (
+                <RingLoader color="red" size={20} />
+              ) : (
+                'Delete'
+              )}
             </button>
           </li>
         </ul>

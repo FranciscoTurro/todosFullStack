@@ -1,10 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Context } from '../context/Context';
+import { getLists } from './getLists';
 
 export const deleteList = () => {
-  const { currentUser, userLists, setUserLists } = useContext(Context);
+  const { currentUser } = useContext(Context);
+
+  const { refetch } = getLists();
 
   const deletion = useMutation({
     mutationFn: (listID: string) => {
@@ -12,8 +15,8 @@ export const deleteList = () => {
         headers: { Authorization: `Bearer ${currentUser}` },
       });
     },
-    onSuccess: (data) => {
-      setUserLists(userLists.filter((list) => list._id !== data.data._id));
+    onSuccess: () => {
+      refetch();
     },
     onError: (error: any) => {
       console.log(error.response.data.error);
