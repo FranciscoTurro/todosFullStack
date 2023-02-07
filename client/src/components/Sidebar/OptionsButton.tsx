@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { RingLoader } from 'react-spinners';
 import { deleteList } from '../../api/deleteList';
+import { renameList } from '../../api/renameList';
 
 interface OptionsButtonProps {
   listID: string;
@@ -8,12 +9,21 @@ interface OptionsButtonProps {
 
 export const OptionsButton: React.FC<OptionsButtonProps> = ({ listID }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isInput, setIsInput] = useState(false);
+  const [newName, setNewName] = useState('');
   const menuRef = useRef<HTMLInputElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const deletion = deleteList();
+  const rename = renameList(newName);
 
-  const handleDelete = () => {
+  const handleDelete = (listID: string) => {
     deletion.mutate(listID);
+  };
+
+  const handleNameChange = (listID: string) => {
+    rename.mutate(listID);
+    setIsInput(false);
+    setIsOpen(false);
   };
 
   const toggleOpen = () => {
@@ -51,24 +61,57 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({ listID }) => {
         ref={menuRef}
         className={`z-10 ${
           isOpen ? '' : 'hidden'
-        } left-0 absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
+        } absolute top-full left-20 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}
       >
-        <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
-          <li className="cursor-pointer block  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            <button className="px-4 py-2 w-full" onClick={() => alert(2)}>
-              Change name
-            </button>
-          </li>
-          <li className="cursor-pointer block  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            <button className="px-4 py-2 w-full" onClick={handleDelete}>
-              {deletion.isLoading ? (
-                <RingLoader color="red" size={20} />
-              ) : (
-                'Delete'
-              )}
-            </button>
-          </li>
-        </ul>
+        {isInput ? (
+          <div className="p-4 text-black flex flex-col gap-4 items-center">
+            <input
+              type="text"
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
+              className="w-11/12"
+            />
+            <div className="flex justify-center gap-3">
+              <button
+                onClick={() => handleNameChange(listID)}
+                className="bg-green-500 rounded-md w-16"
+              >
+                Rename
+              </button>
+              <button
+                onClick={() => setIsInput(false)}
+                className="bg-red-500 rounded-md w-16"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        ) : (
+          <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
+            <li className="cursor-pointer block  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+              <button
+                className="px-4 py-2 w-full"
+                onClick={() => {
+                  setIsInput(true);
+                }}
+              >
+                Change name
+              </button>
+            </li>
+            <li className="cursor-pointer block  hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+              <button
+                className="px-4 py-2 w-full"
+                onClick={() => handleDelete(listID)}
+              >
+                {deletion.isLoading ? (
+                  <RingLoader color="red" size={20} />
+                ) : (
+                  'Delete'
+                )}
+              </button>
+            </li>
+          </ul>
+        )}
       </div>
     </>
   );

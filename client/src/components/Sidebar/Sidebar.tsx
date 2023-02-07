@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { Context } from '../../context/Context';
-import { MoonLoader } from 'react-spinners';
+import { BarLoader, MoonLoader } from 'react-spinners';
 import { FolderIcon } from './FolderIcon';
 import { OptionsButton } from './OptionsButton';
 import { getLists } from '../../api/getLists';
@@ -14,7 +14,7 @@ export const Sidebar = () => {
     <>
       <aside
         id="separator-sidebar"
-        className={`fixed left-0 z-40 w-64 h-screen transition-transform ${
+        className={`fixed left-0 z-40 w-80 h-screen transition-transform ${
           isSidebarOpen
             ? 'sm:translate-x-0 transform-none'
             : '-translate-x-full sm:translate-x-0'
@@ -23,7 +23,7 @@ export const Sidebar = () => {
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
           <ul className="space-y-4 text-center">
             {isLoading ? (
-              <MoonLoader size={30} color="white" />
+              <BarLoader color="white" />
             ) : (
               userLists?.map((list) => {
                 //context holds the current list to show. clicking on a list
@@ -32,7 +32,7 @@ export const Sidebar = () => {
                   <li className="relative flex justify-between" key={list._id}>
                     <div className="flex items-center gap-3">
                       <FolderIcon state="closed" />
-                      {list.name}
+                      <h1 className="text-lg">{list.name}</h1>
                     </div>
                     <OptionsButton listID={list._id} />
                   </li>
