@@ -1,35 +1,14 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Context } from '../../context/Context';
 import { MoonLoader } from 'react-spinners';
 import { FolderIcon } from './FolderIcon';
 import { OptionsButton } from './OptionsButton';
+import { getLists } from '../../api/getLists';
 
 export const Sidebar = () => {
-  const { isSidebarOpen, currentUser } = useContext(Context);
+  const { isSidebarOpen, userLists } = useContext(Context);
 
-  const [lists, setLists] = useState<any[]>();
-
-  const { isLoading } = useQuery({
-    queryKey: ['lists'],
-    queryFn: () => {
-      return axios.get('http://localhost:4000/api/lists/', {
-        headers: { Authorization: `Bearer ${currentUser}` },
-      });
-    },
-    onSuccess: (data) => {
-      setLists(data.data);
-    },
-    onError: (error: any) => {
-      console.log(error.response.data.error);
-    },
-  });
-
-  const handleDelete = (id: string) => {
-    //hmm, starting to look messy. abstract these into hooks?
-    alert(id);
-  };
+  const { isLoading } = getLists();
 
   return (
     <>
@@ -46,7 +25,7 @@ export const Sidebar = () => {
             {isLoading ? (
               <MoonLoader size={30} color="white" />
             ) : (
-              lists?.map((list) => {
+              userLists?.map((list) => {
                 //context holds the current list to show. clicking on a list
                 //changes the context and the folder icon.
                 return (
@@ -55,7 +34,7 @@ export const Sidebar = () => {
                       <FolderIcon state="closed" />
                       {list.name}
                     </div>
-                    <OptionsButton />
+                    <OptionsButton listID={list._id} />
                   </li>
                 );
               })

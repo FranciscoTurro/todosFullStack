@@ -8,7 +8,7 @@ interface IUser {
   password: string;
 }
 
-export const useSignup = () => {
+export const signupUser = () => {
   const { setCurrentUser } = useContext(Context);
 
   const [error, setError] = useState();

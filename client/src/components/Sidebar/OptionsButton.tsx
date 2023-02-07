@@ -1,9 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { deleteList } from '../../api/deleteList';
 
-export const OptionsButton: React.FC = () => {
+interface OptionsButtonProps {
+  listID: string;
+}
+
+export const OptionsButton: React.FC<OptionsButtonProps> = ({ listID }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLInputElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const deletion = deleteList();
+
+  const handleDelete = () => {
+    deletion.mutate(listID);
+  };
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
@@ -11,8 +21,8 @@ export const OptionsButton: React.FC = () => {
 
   useEffect(() => {
     const handler = (event: MouseEvent) => {
-      if (buttonRef.current?.contains(event.target as Node)) return;
       if (menuRef.current === null) return;
+      if (buttonRef.current?.contains(event.target as Node)) return;
       if (!menuRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
@@ -44,10 +54,12 @@ export const OptionsButton: React.FC = () => {
       >
         <ul className="py-2 text-sm text-gray-700 dark:text-gray-200">
           <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            Change name
+            <button onClick={() => alert(2)}> Change name</button>
           </li>
-          <li className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-            Delete
+          <li className="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+            <button className="w-full" onClick={handleDelete}>
+              Delete
+            </button>
           </li>
         </ul>
       </div>

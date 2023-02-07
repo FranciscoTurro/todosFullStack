@@ -5,6 +5,8 @@ interface ContextValueInterface {
   setCurrentUser: React.Dispatch<React.SetStateAction<string>>;
   isSidebarOpen: boolean;
   toggleIsSidebarOpen: () => void;
+  userLists: any[];
+  setUserLists: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
 export const Context = createContext<ContextValueInterface>({
@@ -12,4 +14,6 @@ export const Context = createContext<ContextValueInterface>({
   setCurrentUser: () => {},
   isSidebarOpen: false,
   toggleIsSidebarOpen: () => {},
+  userLists: [],
+  setUserLists: () => {},
 });

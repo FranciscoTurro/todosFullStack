@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CircleLoader } from 'react-spinners';
-import { useSignup } from '../hooks/useSignup';
+import { signupUser } from '../api/signupUser';
 
 interface IUser {
   username: string;
@@ -10,7 +10,7 @@ interface IUser {
 export const Signup = () => {
   const [user, setUser] = useState<IUser>({ username: '', password: '' });
 
-  const { error, signup } = useSignup();
+  const { error, signup } = signupUser();
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

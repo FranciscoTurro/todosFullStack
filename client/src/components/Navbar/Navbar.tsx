@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../context/Context';
-import { useLogout } from '../../hooks/useLogout';
+import { logoutUser } from '../../api/logoutUser';
 
 export const Navbar = () => {
   const { currentUser, toggleIsSidebarOpen } = useContext(Context);
 
-  const logout = useLogout();
+  const logout = logoutUser();
 
   const handleClick = () => {
     logout();
