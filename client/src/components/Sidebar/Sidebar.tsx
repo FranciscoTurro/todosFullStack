@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useContext, useState } from 'react';
 import { Context } from '../../context/Context';
 import { MoonLoader } from 'react-spinners';
+import { FolderIcon } from './FolderIcon';
+import { OptionsButton } from './OptionsButton';
 
 export const Sidebar = () => {
   const { sidebarClassName, currentUser } = useContext(Context);
@@ -24,16 +26,31 @@ export const Sidebar = () => {
     },
   });
 
+  const handleDelete = (id: string) => {
+    //hmm, starting to look messy. abstract these into hooks?
+    alert(id);
+  };
+
   return (
     <>
       <aside id="separator-sidebar" className={sidebarClassName}>
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-          <ul className="space-y-2">
+          <ul className="space-y-4 text-center">
             {isLoading ? (
               <MoonLoader size={30} color="white" />
             ) : (
               lists?.map((list) => {
-                return <li key={list._id}>{list.name}</li>;
+                //context holds the current list to show. clicking on a list
+                //changes the context and the folder icon.
+                return (
+                  <li className="relative flex justify-between" key={list._id}>
+                    <div className="flex items-center gap-3">
+                      <FolderIcon state="closed" />
+                      {list.name}
+                    </div>
+                    <OptionsButton />
+                  </li>
+                );
               })
             )}
           </ul>
