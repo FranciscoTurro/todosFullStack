@@ -13,6 +13,8 @@ export const ContextProvider: React.FC<Props> = ({ children }) => {
     if (user) setCurrentUser(user);
   }, []);
 
+  const [currentList, setCurrentList] = useState('');
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleIsSidebarOpen = () => {
@@ -30,6 +32,8 @@ export const ContextProvider: React.FC<Props> = ({ children }) => {
         toggleIsSidebarOpen,
         userLists,
         setUserLists,
+        currentList,
+        setCurrentList,
       }}
     >
       {children}

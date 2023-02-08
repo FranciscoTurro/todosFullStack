@@ -37,7 +37,7 @@ export const AddListButton = () => {
           ref={inputRef}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          className="text-black h-10 rounded-lg py-2.5 px-5  w-full"
+          className="text-black h-10 rounded-full py-2.5 px-5  w-full"
           type="text"
         />
       </form>
