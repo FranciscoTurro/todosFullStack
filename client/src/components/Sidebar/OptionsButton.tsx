@@ -36,6 +36,8 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({ listID }) => {
       if (buttonRef.current?.contains(event.target as Node)) return;
       if (!menuRef.current.contains(event.target as Node)) {
         setIsOpen(false);
+        setIsInput(false);
+        setNewName('');
       }
     };
     document.addEventListener('mousedown', handler);
