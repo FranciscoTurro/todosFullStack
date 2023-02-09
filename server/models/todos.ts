@@ -1,6 +1,6 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model, Types, Document } from 'mongoose';
 
-export interface ITodo {
+export interface ITodo extends Document {
   name: string;
   description: string;
   dueDate: Date;

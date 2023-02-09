@@ -8,20 +8,23 @@ import { NotLoggedHome } from './pages/NotLoggedHome';
 import { Signup } from './pages/Signup';
 
 export const AppRouter = () => {
-  const { currentUser } = useContext(Context);
+  const { currentUserID } = useContext(Context);
 
   return (
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={currentUser ? <Home /> : <NotLoggedHome />} />
+        <Route
+          path="/"
+          element={currentUserID ? <Home /> : <NotLoggedHome />}
+        />
         <Route
           path="/signup"
-          element={currentUser ? <Navigate to={'/'} /> : <Signup />}
+          element={currentUserID ? <Navigate to={'/'} /> : <Signup />}
         />
         <Route
           path="/login"
-          element={currentUser ? <Navigate to={'/'} /> : <Login />}
+          element={currentUserID ? <Navigate to={'/'} /> : <Login />}
         />
         <Route path="*" element={<Navigate to={'/'} />} />
       </Routes>

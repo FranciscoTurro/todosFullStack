@@ -4,7 +4,7 @@ import { Context } from '../../context/Context';
 import { logoutUser } from '../../api/users';
 
 export const Navbar = () => {
-  const { currentUser, toggleIsSidebarOpen } = useContext(Context);
+  const { currentUserID, toggleIsSidebarOpen } = useContext(Context);
 
   const logout = logoutUser();
 
@@ -15,7 +15,7 @@ export const Navbar = () => {
   return (
     <nav className="h-header-height bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
-        {currentUser ? (
+        {currentUserID ? (
           <button
             type="button"
             onClick={toggleIsSidebarOpen}
@@ -37,7 +37,7 @@ export const Navbar = () => {
             Flowbite
           </span>
         </a>
-        {currentUser ? (
+        {currentUserID ? (
           <ul className="text-sm flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:font-medium border-0">
             <li>
               <button onClick={handleClick}>Log out</button>

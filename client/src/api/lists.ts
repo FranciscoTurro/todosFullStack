@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { Context } from '../context/Context';
 
 export const addList = () => {
-  const { currentUser } = useContext(Context);
+  const { currentUserID } = useContext(Context);
 
   const { refetch } = getLists();
 
@@ -14,7 +14,7 @@ export const addList = () => {
         'http://localhost:4000/api/lists/',
         { name },
         {
-          headers: { Authorization: `Bearer ${currentUser}` },
+          headers: { Authorization: `Bearer ${currentUserID}` },
         }
       );
     },
@@ -30,15 +30,16 @@ export const addList = () => {
 };
 
 export const deleteList = () => {
-  const { currentUser, currentList, setCurrentList } = useContext(Context);
+  const { currentUserID, currentListID, setCurrentListID } =
+    useContext(Context);
 
   const { refetch } = getLists();
 
   const deletion = useMutation({
     mutationFn: (listID: string) => {
-      if (currentList === listID) setCurrentList('');
+      if (currentListID === listID) setCurrentListID('');
       return axios.delete(`http://localhost:4000/api/lists/${listID}`, {
-        headers: { Authorization: `Bearer ${currentUser}` },
+        headers: { Authorization: `Bearer ${currentUserID}` },
       });
     },
     onSuccess: () => {
@@ -53,13 +54,13 @@ export const deleteList = () => {
 };
 
 export const getLists = () => {
-  const { currentUser, setUserLists } = useContext(Context);
+  const { currentUserID, setUserLists } = useContext(Context);
 
   const lists = useQuery({
     queryKey: ['lists'],
     queryFn: () => {
       return axios.get('http://localhost:4000/api/lists/', {
-        headers: { Authorization: `Bearer ${currentUser}` },
+        headers: { Authorization: `Bearer ${currentUserID}` },
       });
     },
     onSuccess: (data) => {
@@ -74,18 +75,17 @@ export const getLists = () => {
 };
 
 export const getCurrentList = () => {
-  const { currentUser, setCurrentListContent, currentList } =
-    useContext(Context);
+  const { currentUserID, setCurrentList, currentListID } = useContext(Context);
 
   const list = useQuery({
     queryKey: ['list'],
     queryFn: () => {
-      return axios.get(`http://localhost:4000/api/lists/${currentList}`, {
-        headers: { Authorization: `Bearer ${currentUser}` },
+      return axios.get(`http://localhost:4000/api/lists/${currentListID}`, {
+        headers: { Authorization: `Bearer ${currentUserID}` },
       });
     },
     onSuccess: (data) => {
-      setCurrentListContent(data.data);
+      setCurrentList(data.data);
     },
     onError: (error: any) => {
       console.log(error.response.data.error);
@@ -96,7 +96,7 @@ export const getCurrentList = () => {
 };
 
 export const renameList = (newName: string) => {
-  const { currentUser } = useContext(Context);
+  const { currentUserID } = useContext(Context);
 
   const { refetch } = getLists();
 
@@ -105,7 +105,7 @@ export const renameList = (newName: string) => {
       return axios.patch(
         `http://localhost:4000/api/lists/${listID}`,
         { name: newName },
-        { headers: { Authorization: `Bearer ${currentUser}` } }
+        { headers: { Authorization: `Bearer ${currentUserID}` } }
       );
     },
     onSuccess: () => {

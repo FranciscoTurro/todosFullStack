@@ -1,9 +1,9 @@
-import { Schema, model, Types } from 'mongoose';
+import { Schema, model, Types, Document } from 'mongoose';
 
-export interface IList {
+export interface IList extends Document {
   name: string;
   todos: Array<Types.ObjectId>;
-  creator: Types.ObjectId;
+  creator: Types.ObjectId | string;
 }
 
 const listSchema = new Schema({

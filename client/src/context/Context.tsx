@@ -1,27 +1,34 @@
 import { createContext } from 'react';
+import { IList } from '../../../server/models/lists';
+
+const emptyIList: IList = Object.assign({
+  name: '',
+  todos: [],
+  creator: '',
+});
 
 interface ContextValueInterface {
-  currentUser: string;
-  setCurrentUser: React.Dispatch<React.SetStateAction<string>>;
+  currentUserID: string;
+  setCurrentUserID: React.Dispatch<React.SetStateAction<string>>;
   isSidebarOpen: boolean;
   toggleIsSidebarOpen: () => void;
-  userLists: any[];
-  setUserLists: React.Dispatch<React.SetStateAction<any[]>>;
-  currentList: string;
-  setCurrentList: React.Dispatch<React.SetStateAction<string>>;
-  currentListContent: any;
-  setCurrentListContent: React.Dispatch<React.SetStateAction<any>>;
+  userLists: IList[];
+  setUserLists: React.Dispatch<React.SetStateAction<IList[]>>;
+  currentListID: string;
+  setCurrentListID: React.Dispatch<React.SetStateAction<string>>;
+  currentList: IList;
+  setCurrentList: React.Dispatch<React.SetStateAction<IList>>;
 }
 
 export const Context = createContext<ContextValueInterface>({
-  currentUser: '',
-  setCurrentUser: () => {},
+  currentUserID: '',
+  setCurrentUserID: () => {},
   isSidebarOpen: false,
   toggleIsSidebarOpen: () => {},
   userLists: [],
   setUserLists: () => {},
-  currentList: '',
+  currentListID: '',
+  setCurrentListID: () => {},
+  currentList: emptyIList,
   setCurrentList: () => {},
-  currentListContent: null,
-  setCurrentListContent: () => {},
 });

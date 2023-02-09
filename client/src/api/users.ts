@@ -9,7 +9,7 @@ interface IUser {
 }
 
 export const signupUser = () => {
-  const { setCurrentUser } = useContext(Context);
+  const { setCurrentUserID } = useContext(Context);
 
   const [error, setError] = useState();
 
@@ -18,9 +18,8 @@ export const signupUser = () => {
       return axios.post('http://localhost:4000/api/users/signup', user);
     },
     onSuccess: (data) => {
-      localStorage.setItem('currentUser', data.data);
-      setCurrentUser(data.data);
-      console.log('SIGNUP WORKED');
+      localStorage.setItem('currentUserID', data.data);
+      setCurrentUserID(data.data);
     },
     onError: (error: any) => {
       setError(error.response.data.error);
@@ -31,20 +30,19 @@ export const signupUser = () => {
 };
 
 export const logoutUser = () => {
-  const { setCurrentUser, setCurrentList } = useContext(Context);
+  const { setCurrentUserID, setCurrentListID } = useContext(Context);
 
   const logout = () => {
-    localStorage.removeItem('currentUser');
-    setCurrentUser('');
-    setCurrentList('');
-    console.log('LOGGED OUT');
+    localStorage.removeItem('currentUserID');
+    setCurrentUserID('');
+    setCurrentListID('');
   };
 
   return logout;
 };
 
 export const loginUser = () => {
-  const { setCurrentUser } = useContext(Context);
+  const { setCurrentUserID } = useContext(Context);
 
   const [error, setError] = useState();
 
@@ -53,9 +51,8 @@ export const loginUser = () => {
       return axios.post('http://localhost:4000/api/users/login', user);
     },
     onSuccess: (data) => {
-      localStorage.setItem('currentUser', data.data);
-      setCurrentUser(data.data);
-      console.log('LOGIN WORKED');
+      localStorage.setItem('currentUserID', data.data);
+      setCurrentUserID(data.data);
     },
     onError: (error: any) => {
       setError(error.response.data.error);

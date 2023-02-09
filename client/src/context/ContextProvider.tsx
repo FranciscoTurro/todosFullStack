@@ -1,21 +1,28 @@
 import { useEffect, useState } from 'react';
 import { Context } from './Context';
+import { IList } from '../../../server/models/lists';
+
+const emptyIList: IList = Object.assign({
+  name: '',
+  todos: [],
+  creator: '',
+});
 
 interface Props {
   children: React.ReactNode;
 }
 
 export const ContextProvider: React.FC<Props> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUserID, setCurrentUserID] = useState('');
 
   useEffect(() => {
-    const user = localStorage.getItem('currentUser');
-    if (user) setCurrentUser(user);
+    const user = localStorage.getItem('currentUserID');
+    if (user) setCurrentUserID(user);
   }, []);
 
-  const [currentList, setCurrentList] = useState('');
+  const [currentListID, setCurrentListID] = useState('');
 
-  const [currentListContent, setCurrentListContent] = useState<any>();
+  const [currentList, setCurrentList] = useState<IList>(emptyIList);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -23,21 +30,21 @@ export const ContextProvider: React.FC<Props> = ({ children }) => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  const [userLists, setUserLists] = useState<any[]>([]);
+  const [userLists, setUserLists] = useState<IList[]>([]);
 
   return (
     <Context.Provider
       value={{
-        currentUser,
-        setCurrentUser,
+        currentUserID,
+        setCurrentUserID,
         isSidebarOpen,
         toggleIsSidebarOpen,
         userLists,
         setUserLists,
+        currentListID,
+        setCurrentListID,
         currentList,
         setCurrentList,
-        currentListContent,
-        setCurrentListContent,
       }}
     >
       {children}

@@ -22,7 +22,7 @@ const folderSVG = (
 );
 
 export const Sidebar = () => {
-  const { isSidebarOpen, userLists, setCurrentList, currentList } =
+  const { isSidebarOpen, userLists, setCurrentListID, currentListID } =
     useContext(Context);
 
   const { isLoading } = getLists();
@@ -46,14 +46,14 @@ export const Sidebar = () => {
               userLists?.map((list) => (
                 <li
                   className={`relative flex justify-between hover:bg-gray-700 p-1 rounded-lg ${
-                    list._id === currentList
+                    list._id === currentListID
                       ? 'bg-red-500 hover:bg-red-500'
                       : null
                   }`}
                   key={list._id}
                 >
                   <button
-                    onClick={() => setCurrentList(list._id)}
+                    onClick={() => setCurrentListID(list._id)}
                     className="w-full flex items-center gap-3 cursor-pointer"
                   >
                     {folderSVG}
