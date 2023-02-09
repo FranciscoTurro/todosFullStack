@@ -31,7 +31,7 @@ export const Sidebar = () => {
     <>
       <aside
         id="separator-sidebar"
-        className={`fixed left-0 z-40 w-80 h-screen transition-transform ${
+        className={`fixed left-0 z-40 w-80 h-full transition-transform ${
           isSidebarOpen
             ? 'sm:translate-x-0 transform-none'
             : '-translate-x-full sm:translate-x-0'

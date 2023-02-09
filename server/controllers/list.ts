@@ -2,6 +2,7 @@ import { ListModel } from '../models/lists';
 import { Request, Response } from 'express';
 import mongoose, { Types } from 'mongoose';
 import { UserModel } from '../models/users';
+import { TodoModel } from '../models/todos';
 
 export const listController = {
   createList: async (req: Request, res: Response) => {
@@ -33,6 +34,8 @@ export const listController = {
 
       if (JSON.stringify(list.creator) !== JSON.stringify(req.user))
         throw Error('List was not created by current user');
+
+      await TodoModel.deleteMany({ list: id });
 
       const user = await UserModel.findById(req.user);
 
