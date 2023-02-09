@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CircleLoader } from 'react-spinners';
-import { loginUser } from '../api/loginUser';
+import { loginUser } from '../api/users';
 
 interface IUser {
   username: string;

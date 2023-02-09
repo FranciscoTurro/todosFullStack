@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { RingLoader } from 'react-spinners';
-import { deleteList } from '../../api/deleteList';
-import { renameList } from '../../api/renameList';
+import { deleteList, renameList } from '../../api/lists';
 
 interface OptionsButtonProps {
   listID: string;

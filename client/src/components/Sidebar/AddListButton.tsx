@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { addList } from '../../api/addList';
+import { addList } from '../../api/lists';
 
 export const AddListButton = () => {
   const [isInput, setIsInput] = useState(false);

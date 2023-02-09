@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Context } from '../../context/Context';
-import { logoutUser } from '../../api/logoutUser';
+import { logoutUser } from '../../api/users';
 
 export const Navbar = () => {
   const { currentUser, toggleIsSidebarOpen } = useContext(Context);

@@ -9,6 +9,8 @@ interface ContextValueInterface {
   setUserLists: React.Dispatch<React.SetStateAction<any[]>>;
   currentList: string;
   setCurrentList: React.Dispatch<React.SetStateAction<string>>;
+  currentListContent: any;
+  setCurrentListContent: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export const Context = createContext<ContextValueInterface>({
@@ -20,4 +22,6 @@ export const Context = createContext<ContextValueInterface>({
   setUserLists: () => {},
   currentList: '',
   setCurrentList: () => {},
+  currentListContent: null,
+  setCurrentListContent: () => {},
 });

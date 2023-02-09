@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { Context } from '../../context/Context';
 import { BarLoader } from 'react-spinners';
 import { OptionsButton } from './OptionsButton';
-import { getLists } from '../../api/getLists';
+import { getLists } from '../../api/lists';
 import { AddListButton } from './AddListButton';
 
 const folderSVG = (
@@ -52,13 +52,13 @@ export const Sidebar = () => {
                   }`}
                   key={list._id}
                 >
-                  <div
+                  <button
                     onClick={() => setCurrentList(list._id)}
                     className="w-full flex items-center gap-3 cursor-pointer"
                   >
                     {folderSVG}
                     <h1 className="text-lg">{list.name}</h1>
-                  </div>
+                  </button>
                   <OptionsButton listID={list._id} />
                 </li>
               ))
