@@ -2,12 +2,6 @@ import { useEffect, useState } from 'react';
 import { Context } from './Context';
 import { IList } from '../../../server/models/lists';
 
-const emptyIList: IList = Object.assign({
-  name: '',
-  todos: [],
-  creator: '',
-});
-
 interface Props {
   children: React.ReactNode;
 }
@@ -22,7 +16,7 @@ export const ContextProvider: React.FC<Props> = ({ children }) => {
 
   const [currentListID, setCurrentListID] = useState('');
 
-  const [currentList, setCurrentList] = useState<IList>(emptyIList);
+  const [currentList, setCurrentList] = useState<any>({});
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 

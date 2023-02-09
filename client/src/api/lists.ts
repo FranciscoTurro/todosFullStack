@@ -78,7 +78,7 @@ export const getCurrentList = () => {
   const { currentUserID, setCurrentList, currentListID } = useContext(Context);
 
   const list = useQuery({
-    queryKey: ['list'],
+    queryKey: ['list', currentListID],
     queryFn: () => {
       return axios.get(`http://localhost:4000/api/lists/${currentListID}`, {
         headers: { Authorization: `Bearer ${currentUserID}` },

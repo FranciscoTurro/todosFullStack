@@ -1,12 +1,6 @@
 import { createContext } from 'react';
 import { IList } from '../../../server/models/lists';
 
-const emptyIList: IList = Object.assign({
-  name: '',
-  todos: [],
-  creator: '',
-});
-
 interface ContextValueInterface {
   currentUserID: string;
   setCurrentUserID: React.Dispatch<React.SetStateAction<string>>;
@@ -16,8 +10,8 @@ interface ContextValueInterface {
   setUserLists: React.Dispatch<React.SetStateAction<IList[]>>;
   currentListID: string;
   setCurrentListID: React.Dispatch<React.SetStateAction<string>>;
-  currentList: IList;
-  setCurrentList: React.Dispatch<React.SetStateAction<IList>>;
+  currentList: any;
+  setCurrentList: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export const Context = createContext<ContextValueInterface>({
@@ -29,6 +23,6 @@ export const Context = createContext<ContextValueInterface>({
   setUserLists: () => {},
   currentListID: '',
   setCurrentListID: () => {},
-  currentList: emptyIList,
+  currentList: {},
   setCurrentList: () => {},
 });
