@@ -14,14 +14,18 @@ export const Todos = () => {
   if (currentList.todos === undefined) return <BarLoader color="red" />;
 
   if (currentListID === '')
-    return <div className="h-content-height p-4 sm:ml-80">Select a list</div>;
+    return (
+      <div className="px-10 h-content-height p-4 sm:ml-80">Select a list</div>
+    );
 
   return (
-    <div className="flex flex-col items-center h-content-height p-4 sm:ml-80">
+    <div className="px-10 flex flex-col items-center h-content-height p-4 sm:ml-80">
       <AddTodoButton />
-      {currentList.todos.map((todo: ITodo) => (
-        <Todo key={todo._id.toString()} todo={todo} />
-      ))}
+      <div className="w-full px-10">
+        {currentList.todos.map((todo: ITodo) => (
+          <Todo key={todo._id.toString()} todo={todo} />
+        ))}
+      </div>
     </div>
   );
 };
