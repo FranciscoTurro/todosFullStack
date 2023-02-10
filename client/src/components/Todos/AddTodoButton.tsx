@@ -1,33 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { addTodo } from '../../api/todos';
 
 export const AddTodoButton = () => {
   const [isMenu, setIsMenu] = useState(false);
-  const menuRef = useRef<HTMLFormElement>(null);
   const addition = addTodo();
 
   const emptyTodo = {
     name: '',
     description: '',
-    dueDate: null,
+    dueDate: '',
   };
   const [todo, setTodo] = useState<any>(emptyTodo);
 
-  useEffect(() => {
-    const handler = (event: MouseEvent) => {
-      if (menuRef.current === null) return;
-      if (!menuRef.current.contains(event.target as Node)) {
-        setIsMenu(false);
-      }
-    };
-    document.addEventListener('mousedown', handler);
-    return () => {
-      document.removeEventListener('mousedown', handler);
-    };
-  });
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (todo.description === '') delete todo.description;
+    if (todo.dueDate === '') delete todo.dueDate;
     addition.mutate(todo);
     setTodo(emptyTodo);
   };
@@ -38,11 +26,7 @@ export const AddTodoButton = () => {
 
   if (isMenu)
     return (
-      <form
-        className="text-md px-10 w-full"
-        ref={menuRef}
-        onSubmit={handleSubmit}
-      >
+      <form className="text-md px-10 w-full" onSubmit={handleSubmit}>
         <div className="mb-6">
           <label
             htmlFor="name"
@@ -51,6 +35,7 @@ export const AddTodoButton = () => {
             Name
           </label>
           <input
+            autoComplete="off"
             onChange={(e) =>
               setTodo({
                 ...todo,
@@ -112,6 +97,7 @@ export const AddTodoButton = () => {
                   dueDate: e.target.value,
                 })
               }
+              value={todo.dueDate}
               type="date"
               className="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Select date"
