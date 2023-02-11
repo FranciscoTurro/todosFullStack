@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { RingLoader } from 'react-spinners';
 import { deleteList, renameList } from '../../api/lists';
+import { threeDotsSVG } from '../../assets/svg/svgs';
 
 interface OptionsButtonProps {
   listID: string;
@@ -53,9 +54,7 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({ listID }) => {
         onClick={toggleOpen}
         ref={buttonRef}
       >
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
-        </svg>
+        {threeDotsSVG}
       </button>
 
       <div

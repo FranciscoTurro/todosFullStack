@@ -29,3 +29,45 @@ export const deleteSVG = (
     />
   </svg>
 );
+
+export const threeBarsSVG = (
+  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
+  </svg>
+);
+
+export const threeDotsSVG = (
+  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+    <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+  </svg>
+);
+
+export const bigCalendarSVG = (
+  <svg
+    aria-hidden="true"
+    className="w-5 h-5 text-gray-500 dark:text-gray-400"
+    fill="currentColor"
+    viewBox="0 0 20 20"
+  >
+    <path
+      fillRule="evenodd"
+      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+      clipRule="evenodd"
+    ></path>
+  </svg>
+);
+
+export const smallCalendarSVG = (
+  <svg
+    aria-hidden="true"
+    className="w-3 h-3 mr-1"
+    fill="currentColor"
+    viewBox="0 0 20 20"
+  >
+    <path
+      fillRule="evenodd"
+      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+      clipRule="evenodd"
+    ></path>
+  </svg>
+);

@@ -1,6 +1,7 @@
 import { ITodo } from '../../../../server/models/todos';
 import { deleteTodo, editTodo } from '../../api/todos';
-import { deleteSVG } from '../../assets/svg/svgs';
+import { deleteSVG, smallCalendarSVG } from '../../assets/svg/svgs';
+import { formatDate } from '../../utils/formatDate';
 
 interface TodoProps {
   todo: ITodo;
@@ -8,14 +9,14 @@ interface TodoProps {
 
 export const Todo: React.FC<TodoProps> = ({ todo }) => {
   const deletion = deleteTodo();
-  const edit = editTodo();
+  const edition = editTodo();
 
   const handleCheck = (
     event: React.ChangeEvent<HTMLInputElement>,
     todoID: string
   ) => {
     const todo = { completed: event.target.checked };
-    edit.mutate({ todoID, todo });
+    edition.mutate({ todoID, todo });
   };
 
   const handleDelete = (todoID: string) => {
@@ -23,7 +24,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
   };
 
   return (
-    <div className="bg-pink-900 w-full flex justify-between text-xl">
+    <div className="bg-pink-900 p-2 w-3/4 flex justify-between text-xl relative">
       <div className="flex gap-4 ">
         <input
           checked={todo.completed}
@@ -33,7 +34,15 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
         />
         {todo.name}
       </div>
-      <button onClick={() => handleDelete(todo._id)}>{deleteSVG}</button>
+      <div className="flex gap-6">
+        {todo.dueDate === undefined ? null : (
+          <span className="bg-blue-100 text-blue-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">
+            {smallCalendarSVG}
+            {formatDate(todo.dueDate)}
+          </span>
+        )}
+        <button onClick={() => handleDelete(todo._id)}>{deleteSVG}</button>
+      </div>
     </div>
   );
 };

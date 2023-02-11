@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { addTodo } from '../../api/todos';
+import { bigCalendarSVG } from '../../assets/svg/svgs';
 
 export const AddTodoButton = () => {
   const [isMenu, setIsMenu] = useState(false);
@@ -26,7 +27,7 @@ export const AddTodoButton = () => {
 
   if (isMenu)
     return (
-      <form className="text-md px-10 w-full" onSubmit={handleSubmit}>
+      <form className="text-md px-10 w-3/4" onSubmit={handleSubmit}>
         <div className="mb-6">
           <label
             htmlFor="name"
@@ -77,18 +78,7 @@ export const AddTodoButton = () => {
           </label>
           <div className="relative w-full">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg
-                aria-hidden="true"
-                className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+              {bigCalendarSVG}
             </div>
             <input
               onChange={(e) =>
@@ -127,7 +117,7 @@ export const AddTodoButton = () => {
   return (
     <button
       onClick={handleClick}
-      className="px-10 flex gap-4 justify-center w-full py-2.5 mr-2 mb-2 font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+      className="px-10 flex gap-4 justify-center w-3/4 py-2.5 m-2 font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
     >
       Add todo
     </button>

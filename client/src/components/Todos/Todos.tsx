@@ -11,12 +11,13 @@ export const Todos = () => {
 
   getCurrentList();
 
-  if (currentList.todos === undefined) return <BarLoader color="red" />;
-
-  if (currentListID === '')
+  if (currentListID === '') {
     return (
       <div className="px-10 h-content-height p-4 sm:ml-80">Select a list</div>
     );
+  }
+
+  if (currentList.todos === undefined) return <BarLoader color="red" />;
 
   return (
     <div className="px-10 flex flex-col items-center h-content-height p-4 sm:ml-80">
@@ -24,7 +25,7 @@ export const Todos = () => {
         {currentList.name}
       </h1>
       <AddTodoButton />
-      <div className="w-full flex flex-col gap-4 py-5 px-10">
+      <div className="w-full items-center flex flex-col gap-4 py-5 px-10">
         {currentList.todos.map((todo: ITodo) => (
           <Todo key={todo._id.toString()} todo={todo} />
         ))}

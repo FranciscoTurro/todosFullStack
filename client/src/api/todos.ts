@@ -66,7 +66,7 @@ export const editTodo = () => {
   const { currentUserID } = useContext(Context);
   const { refetch } = getCurrentList();
 
-  const edit = useMutation({
+  const edition = useMutation({
     mutationFn: ({ todoID, todo }: MutationArgs) => {
       return axios.patch(`http://localhost:4000/api/todos/${todoID}`, todo, {
         headers: { Authorization: `Bearer ${currentUserID}` },
@@ -80,5 +80,5 @@ export const editTodo = () => {
     },
   });
 
-  return edit;
+  return edition;
 };
