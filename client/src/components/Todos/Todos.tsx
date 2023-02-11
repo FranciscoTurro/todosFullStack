@@ -24,7 +24,7 @@ export const Todos = () => {
         {currentList.name}
       </h1>
       <AddTodoButton />
-      <div className="w-full px-10">
+      <div className="w-full flex flex-col gap-4 py-5 px-10">
         {currentList.todos.map((todo: ITodo) => (
           <Todo key={todo._id.toString()} todo={todo} />
         ))}
