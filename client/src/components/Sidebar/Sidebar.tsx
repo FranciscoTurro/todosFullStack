@@ -18,8 +18,8 @@ export const Sidebar = () => {
         id="separator-sidebar"
         className={`fixed left-0 z-40 w-80 h-full transition-transform ${
           isSidebarOpen
-            ? 'sm:translate-x-0 transform-none'
-            : '-translate-x-full sm:translate-x-0'
+            ? 'mdl:translate-x-0 transform-none'
+            : '-translate-x-full mdl:translate-x-0'
         }`}
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">

@@ -14,13 +14,13 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="h-header-height bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+    <nav className="h-header-height bg-white border-gray-200 px-2 mdl:px-4 py-2.5 rounded dark:bg-gray-900">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
         {currentUserID ? (
           <button
             type="button"
             onClick={toggleIsSidebarOpen}
-            className="inline-flex items-center mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center mt-2 ml-3 text-sm text-gray-500 rounded-lg mdl:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
           >
             <span className="sr-only">Open sidebar</span>
             {threeBarsSVG}
@@ -29,7 +29,7 @@ export const Navbar = () => {
         <a href="https://flowbite.com/" className="flex items-center">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
-            className="h-6 mr-3 sm:h-9"
+            className="h-6 mr-3 mdl:h-9"
             alt="Flowbite Logo"
           />
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
@@ -37,13 +37,13 @@ export const Navbar = () => {
           </span>
         </a>
         {currentUserID ? (
-          <ul className="text-sm flex flex-col p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:font-medium border-0">
+          <ul className="text-sm flex flex-col p-4 mt-4 rounded-lg mdl:flex-row mdl:space-x-8 mdl:mt-0 mdl:font-medium border-0">
             <li>
               <button onClick={handleClick}>Log out</button>
             </li>
           </ul>
         ) : (
-          <ul className="text-sm flex flex-col gap-1 p-4 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:font-medium border-0">
+          <ul className="text-sm flex flex-col gap-1 p-4 mt-4 rounded-lg mdl:flex-row mdl:space-x-8 mdl:mt-0 mdl:font-medium border-0">
             <li>
               <Link to={'/signup'}>Sign up</Link>
             </li>
