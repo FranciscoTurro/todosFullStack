@@ -3,6 +3,7 @@ import { ITodo } from '../../../../server/models/todos';
 import { deleteTodo, editTodo } from '../../api/todos';
 import {
   bigCalendarSVG,
+  crossSVG,
   deleteSVG,
   editSVG,
   smallCalendarSVG,
@@ -31,6 +32,8 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
     else return new Date(todo.dueDate).toISOString().substring(0, 10);
   };
 
+  const handleDateDeletion = (todoID: string) => {};
+
   const handleCheck = (
     event: React.ChangeEvent<HTMLInputElement>,
     todoID: string
@@ -48,10 +51,10 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
     todoID: string
   ) => {
     event.preventDefault();
-    console.log(editedTodo.dueDate);
     if (editedTodo.name === '') delete editedTodo.name;
     if (editedTodo.description === '') delete editedTodo.description;
-    if (editedTodo.dueDate === todo.dueDate) delete editedTodo.dueDate;
+    if (editedTodo.dueDate === todo.dueDate || editedTodo.dueDate === '')
+      delete editedTodo.dueDate;
     edition.mutate({ todoID, todo: editedTodo });
     setEditedTodo(emptyTodo);
     setIsEditOpen(false);
@@ -164,9 +167,15 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
       </div>
       <div className="flex items-center gap-6">
         {todo.dueDate === undefined ? null : (
-          <span className="max-h-7 bg-blue-100 text-red-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">
+          <span className="inline-flex items-center px-2 py-1 mr-2 text-sm font-medium text-blue-800 bg-blue-100 rounded dark:bg-blue-900 dark:text-blue-300">
             {smallCalendarSVG}
             {formatDate(todo.dueDate)}
+            <button
+              onClick={() => handleDateDeletion(todo._id)}
+              className="inline-flex items-center p-0.5 ml-2 text-sm text-blue-400 bg-transparent rounded-sm"
+            >
+              {crossSVG}
+            </button>
           </span>
         )}
         <button onClick={() => setIsEditOpen(true)}>{editSVG}</button>

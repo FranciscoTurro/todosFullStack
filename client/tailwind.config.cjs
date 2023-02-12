@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        mdl: '820px', //medium large
+        mdl: '970px', //medium large
       },
       spacing: {
         'header-height': '8%',
