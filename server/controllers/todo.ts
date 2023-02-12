@@ -71,6 +71,11 @@ export const todoController = {
         throw Error('Todo was not created by current user');
 
       await todo.updateOne({ ...req.body });
+      if (req.body.name === '') await todo.updateOne({ $unset: { name: '' } });
+      if (req.body.description === '')
+        await todo.updateOne({ $unset: { description: '' } });
+      if (req.body.dueDate === '')
+        await todo.updateOne({ $unset: { dueDate: '' } });
 
       res.status(200).json('Ok');
     } catch (error: any) {
