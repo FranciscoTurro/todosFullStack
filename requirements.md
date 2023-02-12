@@ -14,8 +14,6 @@
 
 # Things to do
 
-- add proper response codes to each error (throw new Error('New error message', { statusCode: 404 }), and then res.status(e.statusCode))
-
 - design (removing dark:, making sure that all components follow the same rounded, choosing a font, etc) cool color palettes:
 
   - deku: https://www.color-hex.com/color-palette/90100
