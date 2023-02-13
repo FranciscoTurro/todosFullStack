@@ -9,7 +9,6 @@
 
 # Implementation details
 
-- mobile design, the todos become shorter and the sidebar collapses (or becomes smaller), pressing a button brings it back
 - design will be an upgraded clone of https://khunhour.github.io/todo_list/
 
 # Things to do
@@ -19,4 +18,4 @@
   https://www.color-hex.com/color-palette/2897
   https://www.schemecolor.com/love-in-japan-color-scheme.php
 
-- user clicks on a show more tab, it displays the description as a div under the todo
+- date system

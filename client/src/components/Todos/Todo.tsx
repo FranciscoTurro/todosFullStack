@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { ITodo } from '../../../../server/models/todos';
 import { deleteTodo, editTodo } from '../../api/todos';
 import {
+  arrowDownSVG,
+  arrowUpSVG,
   bigCalendarSVG,
   deleteSVG,
   editSVG,
@@ -15,6 +17,8 @@ interface TodoProps {
 
 export const Todo: React.FC<TodoProps> = ({ todo }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const [isDescOpen, setIsDescOpen] = useState(false);
+
   const emptyTodo = {
     name: 'initialString',
     description: 'initialString',
@@ -158,29 +162,43 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
     );
 
   return (
-    <div
-      className={`mdl:w-3/4 w-full flex-wrap bg-gray-600 p-2 flex justify-between text-xl relative ${
-        todo.completed ? `line-through text-gray-500` : ''
-      }`}
-    >
-      <div className="flex gap-4">
-        <input
-          checked={todo.completed}
-          type="checkbox"
-          className="cursor-pointer"
-          onChange={(event) => handleCheck(event, todo._id)}
-        />
-        {todo.name}
+    <div className="flex flex-col mdl:w-3/4 w-full ">
+      <div
+        className={`flex-wrap bg-gray-600 p-2 flex justify-between text-xl relative ${
+          todo.completed ? `line-through text-gray-500` : ''
+        }`}
+      >
+        <div className="flex gap-4">
+          <input
+            checked={todo.completed}
+            type="checkbox"
+            className="cursor-pointer"
+            onChange={(event) => handleCheck(event, todo._id)}
+          />
+          <div className="flex flex-col gap-1">
+            <h1> {todo.name}</h1>
+          </div>
+        </div>
+        <div className="flex items-center gap-6">
+          {todo.dueDate === undefined ? null : (
+            <span className="max-h-7 bg-blue-100 text-red-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">
+              {smallCalendarSVG}
+              {formatDate(todo.dueDate)}
+            </span>
+          )}
+          {todo.description ? (
+            <button onClick={() => setIsDescOpen(!isDescOpen)}>
+              {isDescOpen ? arrowUpSVG : arrowDownSVG}
+            </button>
+          ) : null}
+          <button onClick={() => setIsEditOpen(true)}>{editSVG}</button>
+          <button onClick={() => handleDelete(todo._id)}>{deleteSVG}</button>
+        </div>
       </div>
-      <div className="flex items-center gap-6">
-        {todo.dueDate === undefined ? null : (
-          <span className="max-h-7 bg-blue-100 text-red-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">
-            {smallCalendarSVG}
-            {formatDate(todo.dueDate)}
-          </span>
-        )}
-        <button onClick={() => setIsEditOpen(true)}>{editSVG}</button>
-        <button onClick={() => handleDelete(todo._id)}>{deleteSVG}</button>
+      <div className="px-3">
+        {isDescOpen ? (
+          <div className="bg-red-600 rounded-lg p-1 ">{todo.description}</div>
+        ) : null}
       </div>
     </div>
   );
