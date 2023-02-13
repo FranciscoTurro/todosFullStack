@@ -20,12 +20,12 @@ export const Todos = () => {
   if (currentList.todos === undefined) return <BarLoader color="red" />;
 
   return (
-    <div className="px-10 flex flex-col items-center h-content-height p-4 mdl:ml-80">
+    <div className="mdl:px-10 mdl:p-4 flex flex-col items-center h-content-height  mdl:ml-80">
       <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 mdl:text-5xl lg:text-6xl dark:text-white">
         {currentList.name}
       </h1>
       <AddTodoButton />
-      <div className="w-full items-center flex flex-col gap-4 py-5 px-10">
+      <div className="w-full items-center flex flex-col gap-4 mdl:py-5 mdl:px-10">
         {currentList.todos.map((todo: ITodo) => (
           <Todo key={todo._id.toString()} todo={todo} />
         ))}

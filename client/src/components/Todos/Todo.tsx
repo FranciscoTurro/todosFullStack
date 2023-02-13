@@ -56,7 +56,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
       <div className="flex-col items-center bg-gray-600 p-2 w-3/4 flex justify-between text-xl relative">
         <h1>Edit todo</h1>
         <form
-          className="text-md px-10 w-3/4"
+          className="text-base px-10 w-full mdl:w-3/4"
           onSubmit={(e) => handleEdit(e, todo._id)}
         >
           <div className="mb-6">
@@ -159,11 +159,11 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
 
   return (
     <div
-      className={`w-3/4 bg-gray-600 p-2 flex justify-between text-xl relative ${
+      className={`mdl:w-3/4 w-full flex-wrap bg-gray-600 p-2 flex justify-between text-xl relative ${
         todo.completed ? `line-through text-gray-500` : ''
       }`}
     >
-      <div className="flex gap-4 ">
+      <div className="flex gap-4">
         <input
           checked={todo.completed}
           type="checkbox"

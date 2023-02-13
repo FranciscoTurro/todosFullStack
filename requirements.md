@@ -14,10 +14,9 @@
 
 # Things to do
 
-- design (removing dark:, making sure that all components follow the same rounded, choosing a font, etc) cool color palettes:
-
-  - deku: https://www.color-hex.com/color-palette/90100
-  - synthwave: https://www.color-hex.com/color-palette/57266
-  - golden: https://www.color-hex.com/color-palette/9358
+- design (removing dark:, making sure that all components follow the same rounded, choosing a font, etc)
+  japanese/pastel color palette:
+  https://www.color-hex.com/color-palette/2897
+  https://www.schemecolor.com/love-in-japan-color-scheme.php
 
 - user clicks on a show more tab, it displays the description as a div under the todo
