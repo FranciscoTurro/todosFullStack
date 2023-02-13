@@ -3,7 +3,6 @@ import { ITodo } from '../../../../server/models/todos';
 import { deleteTodo, editTodo } from '../../api/todos';
 import {
   bigCalendarSVG,
-  crossSVG,
   deleteSVG,
   editSVG,
   smallCalendarSVG,
@@ -17,9 +16,9 @@ interface TodoProps {
 export const Todo: React.FC<TodoProps> = ({ todo }) => {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const emptyTodo = {
-    name: null,
-    description: null,
-    dueDate: null,
+    name: 'initialString',
+    description: 'initialString',
+    dueDate: 'initialString',
   };
   const [editedTodo, setEditedTodo] = useState<any>(emptyTodo);
 
@@ -43,9 +42,10 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
     todoID: string
   ) => {
     event.preventDefault();
-    if (editedTodo.name === null) delete editedTodo.name;
-    if (editedTodo.description === null) delete editedTodo.description;
-    if (editedTodo.dueDate === null) delete editedTodo.dueDate;
+    if (editedTodo.name === 'initialString') delete editedTodo.name;
+    if (editedTodo.description === 'initialString')
+      delete editedTodo.description;
+    if (editedTodo.dueDate === 'initialString') delete editedTodo.dueDate;
     edition.mutate({ todoID, todo: editedTodo });
     setEditedTodo(emptyTodo);
     setIsEditOpen(false);
@@ -74,7 +74,11 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
                   name: e.target.value,
                 })
               }
-              value={editedTodo.name !== null ? editedTodo.name : todo.name}
+              value={
+                editedTodo.name !== 'initialString'
+                  ? editedTodo.name
+                  : todo.name
+              }
               className="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
@@ -93,7 +97,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
                 })
               }
               value={
-                editedTodo.description !== null
+                editedTodo.description !== 'initialString'
                   ? editedTodo.description
                   : todo.description
               }
@@ -121,7 +125,8 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
                   });
                 }}
                 value={
-                  todo.dueDate === undefined || editedTodo.dueDate !== null
+                  todo.dueDate === undefined ||
+                  editedTodo.dueDate !== 'initialString'
                     ? editedTodo.dueDate
                     : new Date(todo.dueDate).toISOString().substring(0, 10)
                 }
@@ -153,7 +158,11 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
     );
 
   return (
-    <div className="bg-gray-600 p-2 w-3/4 flex justify-between text-xl relative">
+    <div
+      className={`w-3/4 bg-gray-600 p-2 flex justify-between text-xl relative ${
+        todo.completed ? `line-through text-gray-500` : ''
+      }`}
+    >
       <div className="flex gap-4 ">
         <input
           checked={todo.completed}

@@ -20,5 +20,4 @@
   - synthwave: https://www.color-hex.com/color-palette/57266
   - golden: https://www.color-hex.com/color-palette/9358
 
-- completed todos should be at the bottom of the page, crossed out
 - user clicks on a show more tab, it displays the description as a div under the todo
