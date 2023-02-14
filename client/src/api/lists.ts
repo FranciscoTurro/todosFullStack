@@ -98,7 +98,9 @@ export const getCurrentList = () => {
 export const renameList = (newName: string) => {
   const { currentUserID } = useContext(Context);
 
-  const { refetch } = getLists();
+  const { refetch: refetchLists } = getLists();
+
+  const { refetch: refetchList } = getCurrentList();
 
   const rename = useMutation({
     mutationFn: (listID: string) => {
@@ -109,7 +111,8 @@ export const renameList = (newName: string) => {
       );
     },
     onSuccess: () => {
-      refetch();
+      refetchLists();
+      refetchList();
     },
     onError: (error: any) => {
       console.log(error.response.data.error);

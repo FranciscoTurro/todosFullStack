@@ -4,13 +4,13 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import { apiRouter } from './routes/api/index';
 
+mongoose.set('strictQuery', false);
+dotenv.config();
+
 const connectToDb = async () => {
   if (!process.env.MONGO_URL) console.log('Connection string missing');
   else await mongoose.connect(process.env.MONGO_URL);
 };
-
-mongoose.set('strictQuery', false);
-dotenv.config();
 
 const app = express();
 

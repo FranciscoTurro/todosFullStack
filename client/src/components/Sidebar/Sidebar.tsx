@@ -16,13 +16,13 @@ export const Sidebar = () => {
     <>
       <aside
         id="separator-sidebar"
-        className={`fixed left-0 z-40 w-80 h-full transition-transform ${
+        className={`fixed border-r-2 border-synth_pink left-0 z-40 w-80 h-full transition-transform bg-custom_gray-900 ${
           isSidebarOpen
             ? 'mdl:translate-x-0 transform-none'
             : '-translate-x-full mdl:translate-x-0'
         }`}
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
+        <div className="h-full px-3 py-4 overflow-y-auto">
           <ul className="space-y-4 text-center">
             <AddListButton />
             {isLoading ? (
@@ -30,11 +30,11 @@ export const Sidebar = () => {
             ) : (
               userLists?.map((list) => (
                 <li
-                  className={`relative flex justify-between hover:bg-gray-700 p-1 rounded-lg ${
+                  className={`${
                     list._id === currentListID
-                      ? 'bg-red-500 hover:bg-red-500'
-                      : null
-                  }`}
+                      ? 'bg-synth_pink hover:bg-synth_pink'
+                      : 'hover:bg-synth_blue'
+                  } relative flex justify-between p-2 rounded-lg`}
                   key={list._id}
                 >
                   <button
@@ -48,10 +48,6 @@ export const Sidebar = () => {
                 </li>
               ))
             )}
-          </ul>
-          <ul className="pt-4 mt-4 space-y-2 border-t border-gray-200 dark:border-gray-700">
-            <li>test 1</li>
-            <li>test 1</li>
           </ul>
         </div>
       </aside>

@@ -57,7 +57,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
 
   if (isEditOpen)
     return (
-      <div className="flex-col items-center bg-gray-600 p-2 w-3/4 flex justify-between text-xl relative">
+      <div className="flex-col items-center bg-gray-600 p-2 m-1 w-3/4 flex justify-between text-xl relative">
         <h1>Edit todo</h1>
         <form
           className="text-base px-10 w-full mdl:w-3/4"
@@ -162,9 +162,9 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
     );
 
   return (
-    <div className="flex flex-col mdl:w-3/4 w-full ">
+    <div className="mdl:w-3/4 w-full">
       <div
-        className={`flex-wrap bg-gray-600 p-2 flex justify-between text-xl relative ${
+        className={`rounded-lg flex-wrap bg-synth_pink p-2 flex justify-between text-xl relative ${
           todo.completed ? `line-through text-gray-500` : ''
         }`}
       >
@@ -181,7 +181,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
         </div>
         <div className="flex items-center gap-6">
           {todo.dueDate === undefined ? null : (
-            <span className="max-h-7 bg-blue-100 text-red-800 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-red-400 border border-red-400">
+            <span className="max-h-7 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded bg-gray-900 text-synth_blue border border-synth_blue">
               {smallCalendarSVG}
               {formatDate(todo.dueDate)}
             </span>
@@ -197,7 +197,9 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
       </div>
       <div className="px-3">
         {isDescOpen ? (
-          <div className="bg-red-600 rounded-lg p-1 ">{todo.description}</div>
+          <div className="text-xl bg-synth_blue rounded-lg p-1">
+            {todo.description}
+          </div>
         ) : null}
       </div>
     </div>

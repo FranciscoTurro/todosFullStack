@@ -15,20 +15,18 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="h-header-height flex justify-center items-center bg-white border-gray-200 rounded dark:bg-gray-900">
+    <nav className="bg-custom_gray-900 border-b-2 border-b-synth_pink h-header-height flex justify-center items-center">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
         {currentUserID ? (
           <button
-            type="button"
             onClick={toggleIsSidebarOpen}
-            className="inline-flex items-center mt-2 ml-3 text-sm text-gray-500 rounded-lg mdl:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+            className="inline-flex items-center mt-2 ml-3 text-sm text-gray-500 rounded-lg mdl:hidden focus:outline-none focus:ring-2"
           >
-            <span className="sr-only">Open sidebar</span>
             {threeBarsSVG}
           </button>
         ) : null}
         <Link to={'/'}>
-          <div className="flex gap-2 text-white text-4xl font-bold items-center">
+          <div className="flex gap-2 text-4xl font-bold items-center">
             <img src={icon} alt="" height={40} width={45} />
             全て
           </div>
