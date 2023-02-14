@@ -57,17 +57,18 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
 
   if (isEditOpen)
     return (
-      <div className="flex-col items-center bg-gray-600 p-2 m-1 w-3/4 flex justify-between text-xl relative">
+      <div
+        className={`${
+          todo.completed ? 'border-synth_blue' : 'border-synth_pink'
+        } border rounded-lg flex-col items-center p-2 m-1 w-3/4 flex justify-between text-xl relative`}
+      >
         <h1>Edit todo</h1>
         <form
-          className="text-base px-10 w-full mdl:w-3/4"
+          className="text-base px-10 w-full"
           onSubmit={(e) => handleEdit(e, todo._id)}
         >
           <div className="mb-6">
-            <label
-              htmlFor="name"
-              className="block mb-2 font-medium text-gray-900 dark:text-white"
-            >
+            <label htmlFor="name" className="block mb-2 font-medium">
               Name
             </label>
             <input
@@ -83,7 +84,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
                   ? editedTodo.name
                   : todo.name
               }
-              className="w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="w-full border rounded-lg block p-2.5 bg-custom_gray-700 border-custom_gray-600"
             />
           </div>
           <div className="mb-6">
@@ -107,7 +108,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
               }
               id="description"
               rows={4}
-              className="w-full block p-2.5  text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="w-full border rounded-lg block p-2.5 bg-custom_gray-700 border-custom_gray-600"
             />
           </div>
           <div className="mb-6">
@@ -135,7 +136,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
                     : new Date(todo.dueDate).toISOString().substring(0, 10)
                 }
                 type="date"
-                className="cursor-pointer w-full bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="cursor-pointer w-full rounded-lg block pl-10 p-2 bg-custom_gray-700"
                 placeholder="Select date"
               />
             </div>
@@ -164,8 +165,10 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
   return (
     <div className="mdl:w-3/4 w-full">
       <div
-        className={`rounded-lg flex-wrap bg-synth_pink p-2 flex justify-between text-xl relative ${
-          todo.completed ? `line-through text-gray-500` : ''
+        className={`rounded-lg flex-wrap border-2 p-2 flex justify-between text-xl relative ${
+          todo.completed
+            ? `line-through border-synth_blue text-gray-500`
+            : 'border-synth_pink'
         }`}
       >
         <div className="flex gap-4">
@@ -181,7 +184,13 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
         </div>
         <div className="flex items-center gap-6">
           {todo.dueDate === undefined ? null : (
-            <span className="max-h-7 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded bg-gray-900 text-synth_blue border border-synth_blue">
+            <span
+              className={`${
+                todo.completed
+                  ? 'text-synth_blue border-synth_blue'
+                  : 'text-synth_pink border-synth_pink'
+              } border max-h-7 text-sm font-medium inline-flex items-center px-2.5 py-0.5 rounded`}
+            >
               {smallCalendarSVG}
               {formatDate(todo.dueDate)}
             </span>
@@ -197,7 +206,11 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
       </div>
       <div className="px-3">
         {isDescOpen ? (
-          <div className="text-xl bg-synth_blue rounded-lg p-1">
+          <div
+            className={`${
+              todo.completed ? 'border-synth_blue' : 'border-synth_pink'
+            } text-xl w-full h-48 border-r-2 border-l-2 border-b-2 rounded-lg p-1`}
+          >
             {todo.description}
           </div>
         ) : null}

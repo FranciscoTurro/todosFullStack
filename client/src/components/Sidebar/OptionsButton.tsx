@@ -95,7 +95,7 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({ listID }) => {
                   setIsInput(true);
                 }}
               >
-                Change name
+                Change list name
               </button>
             </li>
             <li className="cursor-pointer block w-full rounded hover:bg-synth_blue">
@@ -106,7 +106,7 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({ listID }) => {
                 {deletion.isLoading ? (
                   <RingLoader color="red" size={20} />
                 ) : (
-                  'Delete'
+                  'Delete list'
                 )}
               </button>
             </li>
