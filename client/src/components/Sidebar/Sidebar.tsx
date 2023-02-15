@@ -16,7 +16,7 @@ export const Sidebar = () => {
     <>
       <aside
         id="separator-sidebar"
-        className={`fixed border-r-2 border-synth_pink left-0 z-40 w-80 h-full transition-transform bg-custom_gray-900 ${
+        className={`fixed border-t border-r-2 border-synth_pink left-0 z-40 w-80 h-full transition-transform bg-custom_gray-900 ${
           isSidebarOpen
             ? 'mdl:translate-x-0 transform-none'
             : '-translate-x-full mdl:translate-x-0'

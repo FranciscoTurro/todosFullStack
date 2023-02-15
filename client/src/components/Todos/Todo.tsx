@@ -144,7 +144,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
           <div className="w-full flex justify-center">
             <button
               type="submit"
-              className="focus:outline-none text-white bg-green-700 hover:bg-gree-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-900"
+              className="focus:outline-none w-24 bg-synth_pink hover:bg-pink-900 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
             >
               Confirm
             </button>
@@ -153,7 +153,7 @@ export const Todo: React.FC<TodoProps> = ({ todo }) => {
                 setEditedTodo(emptyTodo);
                 setIsEditOpen(false);
               }}
-              className="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+              className="focus:outline-none w-24 bg-synth_blue hover:bg-blue-800 focus:ring-4 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
             >
               Cancel
             </button>

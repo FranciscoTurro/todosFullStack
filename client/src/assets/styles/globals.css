@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Tomorrow&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 #root {
-  @apply h-screen;
+  @apply font-Tomorrow h-screen;
 }
 
 body {

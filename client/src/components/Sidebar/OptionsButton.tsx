@@ -69,18 +69,18 @@ export const OptionsButton: React.FC<OptionsButtonProps> = ({ listID }) => {
               type="text"
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
-              className="bg-custom_gray-600 border border-custom_gray-900 w-11/12 rounded-lg p-1"
+              className="bg-custom_gray-600 border border-custom_gray-900 w-full rounded-lg p-1"
             />
             <div className="flex justify-center gap-3">
               <button
                 onClick={() => handleNameChange(listID)}
-                className="focus:outline-none w-16 p-1 bg-synth_pink hover:bg-pink-900 focus:ring-4 font-medium rounded-lg"
+                className="focus:outline-none w-20 p-1 bg-synth_pink hover:bg-pink-900 focus:ring-4 font-medium rounded-lg"
               >
                 Rename
               </button>
               <button
                 onClick={() => setIsInput(false)}
-                className="focus:outline-none w-16 p-1 bg-synth_blue   hover:bg-blue-800 focus:ring-4 font-medium rounded-lg"
+                className="focus:outline-none w-20 p-1 bg-synth_blue hover:bg-blue-800 focus:ring-4 font-medium rounded-lg"
               >
                 Cancel
               </button>

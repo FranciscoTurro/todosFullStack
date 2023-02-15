@@ -17,48 +17,55 @@ export const Signup = () => {
     signup.mutate(user);
   };
 
-  if (signup.isLoading) return <CircleLoader color="red" />;
+  if (signup.isLoading)
+    return (
+      <div className="w-full flex justify-center items-center h-1/2">
+        <CircleLoader color="blue" />
+      </div>
+    );
 
-  return signup.isLoading ? (
-    <div>loading</div>
-  ) : (
-    <form autoComplete="off" onSubmit={handleSubmit}>
-      SIGNUP
-      <div className="mb-6">
-        <label htmlFor="userName" className="block mb-2 text-sm font-medium ">
-          Username
-        </label>
-        <input
-          onChange={(e) => setUser({ ...user, username: e.target.value })}
-          value={user.username}
-          type="text"
-          id="userName"
-          className="text-black bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          required
-        />
-      </div>
-      <div className="mb-6">
-        <label htmlFor="password" className="block mb-2 text-sm font-medium">
-          Your password
-        </label>
-        <input
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
-          type="password"
-          id="password"
-          value={user.password}
-          className="text-black bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          required
-        />
-      </div>
-      <div>
-        {error ? <p className="text-red-500">{error}</p> : null}
+  return (
+    <div className="m-6 flex flex-col items-center gap-6">
+      <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight mdl:text-5xl lg:text-6xl">
+        Signup
+      </h1>
+      <form autoComplete="off" className="w-1/2" onSubmit={handleSubmit}>
+        <div className="mb-6">
+          <label htmlFor="userName" className="block mb-2 text-sm font-medium">
+            Username
+          </label>
+          <input
+            onChange={(e) => setUser({ ...user, username: e.target.value })}
+            value={user.username}
+            type="text"
+            id="userName"
+            className="bg-custom_gray-700 rounded-lg block p-2.5 w-full"
+            required
+          />
+        </div>
+        <div className="mb-6">
+          <label htmlFor="password" className="block mb-2 text-sm font-medium">
+            Password
+          </label>
+          <input
+            onChange={(e) => setUser({ ...user, password: e.target.value })}
+            value={user.password}
+            type="password"
+            id="password"
+            className="w-full bg-custom_gray-700 rounded-lg block p-2.5"
+            required
+          />
+        </div>
+        <div className="text-center text-xl">
+          {error ? <p className="text-synth_blue">{error}</p> : null}
+        </div>
         <button
           type="submit"
-          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full mdl:w-auto px-5 py-2.5 text-center"
+          className="focus:ring-synth_pink bg-synth_pink hover:bg-pink-900 w-full py-2.5 font-medium focus:outline-none rounded-full focus:ring-4"
         >
-          Submit
+          Signup
         </button>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 };
